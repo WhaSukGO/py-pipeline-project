@@ -4,6 +4,9 @@ pipeline {
 		choice(name: 'VERSION', choices: ['1.1.0','1.2.0','1.3.0'], description: '')
 		booleanParam(name: 'executeTests', defaultValue: true, description: '')
 	}
+	environment {
+		PATH = "/usr/local/bin:${env.PATH}"
+	}	
 	stages {
 		stage("init") {
 			steps {
@@ -20,7 +23,7 @@ pipeline {
 		stage("Build") {
 			steps {
 				
-				sh '/usr/local/bin/docker-compose build web'
+				sh 'docker-compose build web'
 			}
 		}
 		stage("test") {
@@ -37,7 +40,7 @@ pipeline {
 		}
 		stage("deploy") {
 			steps {
-				sh "/usr/local/bin/docker-compose up -d"
+				sh "docker-compose up -d"
 			}
 		}
 	}
