@@ -1,5 +1,4 @@
 FROM python:3.9
-ENV PATH /usr/local/bin:$PATH
 
 WORKDIR /app
 
